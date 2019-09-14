@@ -1,0 +1,7 @@
+Amazon Polly (text-to-speech) https://us-east-1.console.aws.amazon.com/polly/home?region=us-east-1
+--- Polly for developers: https://aws.amazon.com/polly/developers/ 
+
+Inverted Index ---- tag-query matching
+
+Each user (tenant or searcher) has a vector of numbers for each tag, compare the difference between two vectors
+--- issue: that's gonna be a lot of vectors to compare...? 
