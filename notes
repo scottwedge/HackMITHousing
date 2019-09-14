@@ -1,0 +1,30 @@
+
+===============================
+Speech & Text 
+
+Amazon Polly (text-to-speech) https://us-east-1.console.aws.amazon.com/polly/home?region=us-east-1
+--- Polly for developers: https://aws.amazon.com/polly/developers/ 
+
+Inverted Index ---- tag-query matching
+
+
+================================
+Matching Algorithm
+
+Each user (tenant + landlord) has a vector of numbers for each tag, compare the difference between two vectors
+- preferred working hours
+- distance between locations: Euclidean distance? distance between coordinates --- Google Maps API, travel distance & time
+---- travel time as an indicator of how far the places are
+---- scoring system: 
+- other tags: True or False in the vector 
+--- work type: kitchen, bathroom, furniture, entire apartment
+--- (optional) area of the place in ft^2, (not as a tag, just to inform the tenants)
+
+- priority:
+1. work type - first requirement, not matching means not possible
+2. working hours - smaller than expectation for tenants
+3. distance, indicated by walking time
+
+- provide top 5 candidates
+
+
