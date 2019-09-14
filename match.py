@@ -12,8 +12,11 @@ def calc_dist_diff(self, landlord_x, landlord_y, tenant_x, tenant_y):
   """
   method to return a score that represents difference in distance
   """
-  pass 
-
+  
+  #to d0
+  
+  
+  return 2.0 #needs to be changed 
 
 
 
@@ -46,10 +49,15 @@ def calc_diff(self, landlord, tenant):
   hour_diff = abs(landlord[HOURS] - tenant[HOURS]) 
   
   #diff in location distance
-  dist_diff = #??? use Google Maps
+  dist_diff = self.calc_dist_diff(landlord[LOC_X], landlord[LOC_Y], tenant[LOC_X], tenant[LOC_Y])
 
   
-
+  #the following needs to be changed
+  res = []
+  res.append(hour_diff)
+  res.append(dist_diff)
+  
+  return res
   
   
 def main(self, landlord, tenants):
@@ -77,7 +85,7 @@ if __name__ == '__main__':
   MONTH_END = 3
   DATE_END = 4
   WORK_TYPE = 5
-  RATE = 6
+  RATE = 6 #rating
   HOURS = 7
   LOC_X = 8
   LOC_Y = 9
@@ -89,6 +97,10 @@ if __name__ == '__main__':
   FURN = 2 #furniture
   ALL = 3 #entire apartment
            
+  
+  landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, 0, 0]
+  tenants = [[2018, 4, 1, 6, 1, ALL, 3, 4, 0, 0]]
+  
   res = self.main(landlord, tenants)
            
   print(res)
