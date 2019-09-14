@@ -1,0 +1,166 @@
+{%load static%}
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Add an Artifact - CHAD</title>
+  <link rel="stylesheet" href="/static/add/style.css">
+  <script>
+    function displayForm(answer) {
+                if (answer == "yes") { // hide the div that is not selected
+                    document.getElementById('yesquestion').style.display = "block";
+                }
+            }
+
+            function hideForm() {
+                document.getElementById('yesquestion').style.display = "none";
+            }
+
+            function displayQuestion(answer) {
+                document.getElementById(answer + 'Question').style.display = "block";
+
+                if (answer == "yes") { // hide the div that is not selected
+                    document.getElementById('noQuestion').style.display = "none";
+                } else if (answer == "no") {
+                    document.getElementById('yesQuestion').style.display = "none";
+                }
+            }
+        </script>
+</head>
+
+<body>
+  <div class="linkbar">
+    <div class="welcome">
+      <a href="/login/first"> <button class="searchbtn"> Home </button> </a>
+    </div>
+    <div class="search dropdown">
+      <a href="/login/first#1"> <button onclick="dropdown()" class="searchbtn"> Basic Search </button> </a>
+    </div>
+
+    <div class="mapsearch">
+      <a href="/login/first#2"> <button class="searchbtn"> Map Search </button> </a>
+    </div>
+
+    <div class="add">
+      <a href="/login/first#3">
+        <button class="searchbtn">
+          Add
+        </button>
+      </a>
+    </div>
+
+  </div>
+
+  <div>
+    <h2> Add Artifact</h2>
+  </div>
+
+
+  <div class="content">
+    <div class="source">
+      <form name="addartipub" action="{% url 'add:proc_art' %}" method="post">
+        {%csrf_token%}
+        <fieldset id="source">
+          <legend>Source</legend>
+          <input type="radio" id="yes" name="source" value="yes" onchange="displayQuestion(this.value)" required=required>Personal</input>
+          <input type="radio" id="no" name="source" value="no" onchange="displayQuestion(this.value)" required=required>Publication</input>
+
+          <div id='yesQuestion' style="display:none;"></br>
+            <label for="date">*Date:</label>
+            <!-- also make the date string first -->
+            <input type="text" id="date" name="date" class="midinput" /><br />
+            <label for="resource_id">*Person's Name:</label>
+            <input type="text" id="last_name" name="last_name" class="midlabelin" onfocus="if(this.value=='Last'){this.value='';}this.style.color='#000';" onblur="if(this.value==''){this.value='Last';this.style.color='#999';}" value="Last" />
+            <input type="text" id="first_name" name="first_name" class="midlabelin" onfocus="if(this.value=='First'){this.value='';}this.style.color='#000';" onblur="if(this.value==''){this.value='First';this.style.color='#999';}" value="First" /><br />
+            <label for="note">Note:</label>
+            <textarea id="note" name="note" cols="39" rows="2"></textarea>
+          </div>
+
+          <div id='noQuestion' style="display:none;"></br>
+            <label for="resource_id">*Publication
+              Title:</label>
+            <select id="resource_id" name="resource_id" class="midinput">
+              <option value="">--------Select
+                One--------</option>
+              {% for key, value in publications.items %}
+              <option value="{{key}}">{{value}}</option>
+              {% endfor %}
+            </select>
+            <a href="add_pub" target="_blank">
+              No existing publication? Add a
+              publication first!</a><br />
+            <label for="page_number">*Page Number:</label>
+            <input type="number" id="page_number" name="page_number" maxlength="10" class="midinput" /><br />
+          </div>
+        </fieldset>
+    </div>
+
+    <div class="object">
+      <fieldset id="artifact">
+        <legend>Object</legend>
+        <label for="quantity">*Quantity:</label>
+        <input type="number" id="quantity" name="quantity" maxlength="3" class="smallinput" /><br />
+        <label for="dimension">Dimension(/cm):</label>
+        <input type="number" class="smallinput" placeholder="length" id="length" name="length" maxlength="6" />
+        ×
+        <input type="number" class="smallinput" placeholder="width" id="width" name="width" maxlength="6" />
+        ×
+        <input type="number" class="smallinput" placeholder="height" id="height" name="height" maxlength="6" />
+        (rounding off to 1 decimal place)<br />
+        <label for="timeperiod">Date:</label>
+        <!-- make the date to string first -->
+        <input type="text" id="start_year" name="start_year" class="litmidinput" />
+        --
+        <input type="text" id="end_year" name="end_year" class="litmidinput" /><br />
+        <label for="type">Type Name:</label>
+        <input type="text" id="type" name="type" maxlength="30" class="midinput" /><br />
+        <label for="identifier">External Identifier:</label>
+        <input type="text" id="identifier" name="identifier" class="midinput" /><br />
+        <label for="description">Description:</label>
+        <textarea name="description" cols="50" rows="8"></textarea>
+      </fieldset>
+    </div>
+
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <div class="location">
+      <fieldset id="location">
+        <legend>Location</legend>
+        <select id="location_id" name="location_id" class="midinput">
+          <option value="">--------Select One--------</option>
+          {% for key, value in places.items %}
+          <option value="{{key}}">{{value}}</option>
+          {% endfor %}
+        </select>
+        <a href="{% url 'add:add_place'%}" target="_blank">
+          No existing location? Add a location first!</a>
+      </fieldset>
+    </div>
+
+    <fieldset>
+      Are there inscriptions on this artifact?<br />
+      <input type="radio" onchange="displayForm(this.value)" name="inscript" value="yes" id="yesCheck">
+      Yes<br>
+      <input type="radio" onchange="hideForm()" name="inscript" value="no" id="noCheck">
+      No<br>
+
+      <div id="yesquestion" style="display:none;">
+        <legend>Inscription</legend>
+        <label for="content">*Content:</label>
+        <textarea name="content" cols="50" rows="12"></textarea><br />
+        <label for="note">Note:</label>
+        <textarea name="note" cols="50" rows="4"></textarea><br />
+      </div>
+    </fieldset>
+    <input type="submit" value="submit" name="submit" /> <br />
+
+    </form>
+  </div>
+</body>
+
+</html>
