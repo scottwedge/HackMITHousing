@@ -46,7 +46,7 @@ def calc_diff(landlord, tenant):
     return [-1]
   
   #diff in expectation of hours
-  hour_diff = abs(landlord[HOURS] - tenant[HOURS]) 
+  hour_diff = float(abs(landlord[HOURS] - tenant[HOURS])) 
   
   #diff in location distance
   dist_diff = calc_dist_diff(landlord[LOC_X], landlord[LOC_Y], tenant[LOC_X], tenant[LOC_Y])
@@ -57,7 +57,8 @@ def calc_diff(landlord, tenant):
   res.append(hour_diff)
   res.append(dist_diff)
   
-  return res
+  #print(res)
+  return sum(res)
   
   
 def main(landlord, tenants):
@@ -73,8 +74,9 @@ def main(landlord, tenants):
 
     tenant_id = 0
     res[tenant_id] = diff
-
+  
   return res
+
 
 if __name__ == '__main__':
   
@@ -98,7 +100,6 @@ if __name__ == '__main__':
   BATH = 1 #bathroom
   FURN = 2 #furniture
   ALL = 3 #entire apartment
-          
   
   landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, 0, 0]
   tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, 0, 0]]
