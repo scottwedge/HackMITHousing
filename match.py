@@ -1,6 +1,8 @@
 """
 Toy algorithm for computing score between a landlord's request and a tenant's availability
-Output: 
+TODO:
+  calc_dist_diff
+  get tenant id
 """
 
 import datetime
