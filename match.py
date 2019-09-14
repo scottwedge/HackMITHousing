@@ -28,7 +28,7 @@ def calc_diff(landlord, tenant):
 
   #work type doesn't match, return very high diff score
   if landlord[WORK_TYPE] != tenant[WORK_TYPE]:
-    return [-1]
+    return float("inf")
   
   #Check for overlap in date
   l_date_start = datetime.datetime(landlord[YEAR], landlord[MONTH_START], landlord[DATE_START])
@@ -38,12 +38,12 @@ def calc_diff(landlord, tenant):
   
   if not (t_date_start <= l_date_start or t_date_end >= l_date_end): #no overlap front or back
     #print("no overlap in time")
-    return [-1]
+    return float("inf")
   
   
   #check for rating expectation
   if tenant[RATE] < landlord[RATE]:
-    return [-1]
+    return float("inf")
   
   #diff in expectation of hours
   hour_diff = float(abs(landlord[HOURS] - tenant[HOURS])) 
@@ -67,13 +67,14 @@ def main(landlord, tenants):
   """
 
   res = {}
+  tenant_id = 0
 
   for tenant in tenants:
     
     diff = calc_diff(landlord, tenant)
 
-    tenant_id = 0
     res[tenant_id] = diff
+    tenant_id += 1
   
   return res
 
@@ -102,9 +103,13 @@ if __name__ == '__main__':
   ALL = 3 #entire apartment
   
   landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, 0, 0]
-  tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, 0, 0]]
+  tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, 0, 0],
+              [2018,5, 2, 5, 20, BATH, 4, 3, 0, 0],
+              [2018, 4, 2, 6, 30, ALL, 3, 1, 0, 0]]
   
   res = main(landlord, tenants)
+
+  sorted_res = sorted(res.items(), key=lambda kv: kv[1])
           
-  print(res)
+  print(sorted_res)
   
