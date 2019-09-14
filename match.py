@@ -3,10 +3,11 @@ Toy algorithm for computing score between a landlord's request and a tenant's av
 Output: 
 """
 
-from datetime import *
+import datetime
 
 
-def calc_dist_diff(self, landlord_x, landlord_y, tenant_x, tenant_y):
+
+def calc_dist_diff(landlord_x, landlord_y, tenant_x, tenant_y):
   """
   method to return a score that represents difference in distance
   """
@@ -18,7 +19,7 @@ def calc_dist_diff(self, landlord_x, landlord_y, tenant_x, tenant_y):
 
 
 
-def calc_diff(self, landlord, tenant):
+def calc_diff(landlord, tenant):
   """
   Main algorithm to calculate the difference score for one pair of landlord and tenant
   output: diff score ---???
@@ -27,7 +28,7 @@ def calc_diff(self, landlord, tenant):
 
   #work type doesn't match, return very high diff score
   if landlord[WORK_TYPE] != tenant[WORK_TYPE]:
-    return #??
+    return [-1]
   
   #Check for overlap in date
   l_date_start = datetime.datetime(landlord[YEAR], landlord[MONTH_START], landlord[DATE_START])
@@ -35,19 +36,20 @@ def calc_diff(self, landlord, tenant):
   t_date_start = datetime.datetime(tenant[YEAR], tenant[MONTH_START], tenant[DATE_START])
   t_date_end = datetime.datetime(tenant[YEAR], tenant[MONTH_END], tenant[DATE_END])
   
-  if not (t_date_start >= l_date_start or t_date_end <= l_date_end): #no overlap front or back
-    return #??
+  if not (t_date_start <= l_date_start or t_date_end >= l_date_end): #no overlap front or back
+    #print("no overlap in time")
+    return [-1]
   
   
   #check for rating expectation
   if tenant[RATE] < landlord[RATE]:
-    return #??
+    return [-1]
   
   #diff in expectation of hours
   hour_diff = abs(landlord[HOURS] - tenant[HOURS]) 
   
   #diff in location distance
-  dist_diff = self.calc_dist_diff(landlord[LOC_X], landlord[LOC_Y], tenant[LOC_X], tenant[LOC_Y])
+  dist_diff = calc_dist_diff(landlord[LOC_X], landlord[LOC_Y], tenant[LOC_X], tenant[LOC_Y])
 
   
   #the following needs to be changed
@@ -58,7 +60,7 @@ def calc_diff(self, landlord, tenant):
   return res
   
   
-def main(self, landlord, tenants):
+def main(landlord, tenants):
   """
   output: dictioanry "res" that has every tenant's score
   """
@@ -67,8 +69,10 @@ def main(self, landlord, tenants):
 
   for tenant in tenants:
     
-    diff = self.calc_diff(landlord, tenant)
-    res.append(diff)
+    diff = calc_diff(landlord, tenant)
+
+    tenant_id = 0
+    res[tenant_id] = diff
 
   return res
 
@@ -94,12 +98,12 @@ if __name__ == '__main__':
   BATH = 1 #bathroom
   FURN = 2 #furniture
   ALL = 3 #entire apartment
-           
+          
   
   landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, 0, 0]
-  tenants = [[2018, 4, 1, 6, 1, ALL, 3, 4, 0, 0]]
+  tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, 0, 0]]
   
-  res = self.main(landlord, tenants)
-           
+  res = main(landlord, tenants)
+          
   print(res)
   
