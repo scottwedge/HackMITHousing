@@ -37,5 +37,6 @@ class Employee(models.Model):
   
   work_type = models.ChoiceField(choices=WORK_TYPES)
   max_hours = models.IntegerField(min_value=1, max_value=24)
+  street_address = models.CharField(max_length=500)
   city = models.CharField(max_length=100)
   state = models.CharField(max_length=100)
