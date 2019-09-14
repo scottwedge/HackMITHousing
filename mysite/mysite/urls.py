@@ -14,8 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.http import HttpResponseRedirect
+from django.urls import include, path, reverse
+
+def redirect(request):
+    return HttpResponseRedirect(reverse('login:main'))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', redirect),
+    path('login/', include('login.urls')),
+    path('employee/', include('employee.urls')),
+    path('employer/', include('employer.urls')),
+    path('landlord/', include('landlord.urls')),
+    path('tenant/', include('tenant.urls'))
+    # yet to be implemented:
+    # - upload images of the house;
+    # - images of employers & employees
+    # - background check
 ]
