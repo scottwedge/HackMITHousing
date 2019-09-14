@@ -12,6 +12,7 @@ class Employer(models.Model):
   employee_id = models.AutoField(primary_key=True)
   name = models.CharField(max_length=200)
   gender = models.ChoiceField(choices=GENDERS)
+  age = models.IntegerField(max_value=90)
   
   start_date = models.DateField(input_format='%Y-%m-%d', initial=datetime.date.today)
   end_date = models.DateField(input_format='%Y-%m-%d', initial=datetime.date.today)
