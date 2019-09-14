@@ -26,9 +26,9 @@ def check(request):
 
 @login_required(login_url='/login')
 def main(request):
-    if request.user.profile.type == 1:
+    if request.user.profile.type == 'er':
         return render(request, 'employer.html')
-    elif request.user.profile.type == 2:
+    elif request.user.profile.type == 'ee':
         return render(request, 'employee.html')
 
 
