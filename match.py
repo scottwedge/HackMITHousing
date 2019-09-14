@@ -53,7 +53,10 @@ def calc_diff(self, landlord, tenant):
 
   
   
-__main__():
+def main(self, landlord, tenants):
+  """
+  output: dictioanry "res" that has every tenant's score
+  """
   NUM_TAG = 9 #ie. length of each user's array
 
   #map each tag to its index in the array
@@ -76,14 +79,18 @@ __main__():
   ALL = 3 #entire apartment
 
 
-  #landlord: list for curr landlord
-  #tenants: list for all tenants
-
-  landlord[2019, 5, 1, 5, 10, ALL, 10, 2, 
-
+  res = {}
 
   for tenant in tenants:
-  
-  
-  
+    
+    diff = self.calc_diff(landlord, tenant)
+    res.append(diff)
+
+  return res
+
+if __name__ == '__main__':
+           
+  res = self.main(landlord, tenants)
+           
+  print(res)
   
