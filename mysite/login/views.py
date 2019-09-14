@@ -15,6 +15,7 @@ def check(request):
     id = request.POST['id']
     pw = request.POST['pw']
 
+
     user = authenticate(username=id, password=pw)
 
     if user is not None:
@@ -23,12 +24,12 @@ def check(request):
     else:
         return render(request, 'login.html', {'attempt': True})
 
-
 @login_required(login_url='/login')
 def main(request):
-    if request.user.profile.type == 'er':
+    identity = request.POST['identity']
+    if identity == 'employer':
         return render(request, 'employer.html')
-    elif request.user.profile.type == 'ee':
+    elif identity == 'employee':
         return render(request, 'employee.html')
 
 

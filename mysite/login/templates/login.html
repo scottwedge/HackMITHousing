@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<!-- username: yzeng19
+password: BrownUniversity2022 -->
+
 <head>
     <title>Clean House Initiative login</title>
 	<link rel="stylesheet" href="/static/login/login_style.css">
@@ -13,21 +16,26 @@
     <div class="login">
         <form method="post" action="{%url 'login:check'%}">
             {%csrf_token%}
-            <h3>Login: yzeng19; password: yzeng19</h3> {%if attempt%}
+            {%if attempt%}
             <p style="color:#FF0000;"><strong>{{"Invalid Login or Password"}}</strong></p>
             {%endif%}
-			<div class="info">
-				<div>
-	            	<input type="input" name="id" placeholder="Login"/>
-				</div>
-				<div>
-	            	<input type="input" name="pw" placeholder="Password"/>
-				</div>
-				<div>
-	            	<input type="submit" name="submit" value="submit" />
-				</div>
-			</div>
+    			<div class="info">
+    				<div>
+    	            	<input type="input" name="id" placeholder="Login"/>
+    				</div>
+    				<div>
+    	            	<input type="input" name="pw" placeholder="Password"/>
+    				</div>
+            <div>
+                    <input type="input" name="identity" placeholder="employer/employee"/>
+            </div>
+    				<div>
+    	            	<button type="submit">Submit</button>
+    				</div>
+    			</div>
         </form>
+
+
     </div>
 </body>
 
