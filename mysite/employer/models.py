@@ -18,6 +18,7 @@ class Employer(models.Model):
   end_date = models.DateField(input_format='%Y-%m-%d', initial=datetime.date.today)
   
   work_type = models.ChoiceField(choices=WORK_TYPES)
-  max_hours = models.IntegerField(min_value=1, max_value=24)
+  min_hours = models.IntegerField(min_value=1, max_value=24)
+  street_address = models.CharField(max_length=500)
   city = models.CharField(max_length=100)
   state = models.CharField(max_length=100)
