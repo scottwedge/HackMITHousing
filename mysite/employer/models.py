@@ -9,7 +9,7 @@ WORK_TYPES = [('kitchen', 'KITCHEN'), ('bathroom', 'BATHROOM'), ('furniture', 'F
 
 class Employer(models.Model):
   
-  employee_id = models.AutoField(primary_key=True)
+  employer_id = models.AutoField(primary_key=True)
   name = models.CharField(max_length=200)
   gender = models.ChoiceField(choices=GENDERS)
   age = models.IntegerField(max_value=90)
