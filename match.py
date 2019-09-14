@@ -1,8 +1,6 @@
 """
 Toy algorithm for computing score between a landlord's request and a tenant's availability
-
 Output: 
-
 """
 
 from datetime import *
