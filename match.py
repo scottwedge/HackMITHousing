@@ -7,34 +7,22 @@ Output:
 
 from datetime import *
 
-NUM_TAG =  #ie. length of each user's array
 
-#map each tag to its index in the array
-WORK_TYPE = 
-YEAR = 
-MONTH_START = 
-DATE_START = 
-MONTH_END = 
-DATE_END = 
-HOURS = 
-DISTANCE = 
-PRICE = 
-RATE = 
-
-#Value for each work type
-KITCHEN = 0 #kitchen
-BATH = 1 #bathroom
-FURN = 2 #furniture
-ALL = 3 #entire apartment
+def calc_dist_diff(self, landlord_x, landlord_y, tenant_x, tenant_y):
+  """
+  method to return a score that represents difference in distance
+  """
+  pass 
 
 
-#landlord: list for curr landlord
-#tenants: list for all tenants
-
-res = {}
 
 
-for tenant in tenants:
+def calc_diff(self, landlord, tenant):
+  """
+  Main algorithm to calculate the difference score for one pair of landlord and tenant
+  """
+  
+  res = {}
 
   #work type doesn't match, return very high diff score
   if landlord[WORK_TYPE] != tenant[WORK_TYPE]:
@@ -58,7 +46,44 @@ for tenant in tenants:
   hour_diff = abs(landlord[HOURS] - tenant[HOURS]) 
   
   #diff in location distance
-  dist_diff = abs(landlord[DIST] - tenant[DIST])
+  dist_diff = #??? use 
+  
+  res["hour_diff"] = hour_diff
+  res["dist_diff"] = dist_diff
+
+  
+  
+__main__():
+  NUM_TAG = 9 #ie. length of each user's array
+
+  #map each tag to its index in the array
+  YEAR = 0
+  MONTH_START = 1
+  DATE_START = 2
+  MONTH_END = 3
+  DATE_END = 4
+  WORK_TYPE = 5
+  RATE = 6
+  HOURS = 7
+  LOC_X = 8
+  LOC_Y = 9
+
+
+  #Value for each work type
+  KITCHEN = 0 #kitchen
+  BATH = 1 #bathroom
+  FURN = 2 #furniture
+  ALL = 3 #entire apartment
+
+
+  #landlord: list for curr landlord
+  #tenants: list for all tenants
+
+  landlord[2019, 5, 1, 5, 10, ALL, 10, 2, 
+
+
+  for tenant in tenants:
+  
   
   
   
