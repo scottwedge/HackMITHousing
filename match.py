@@ -20,30 +20,9 @@ def calc_dist_diff(self, landlord_x, landlord_y, tenant_x, tenant_y):
 def calc_diff(self, landlord, tenant):
   """
   Main algorithm to calculate the difference score for one pair of landlord and tenant
+  output: diff score ---???
   """
-  
-  NUM_TAG = 9 #ie. length of each user's array
 
-  #map each tag to its index in the array
-  YEAR = 0
-  MONTH_START = 1
-  DATE_START = 2
-  MONTH_END = 3
-  DATE_END = 4
-  WORK_TYPE = 5
-  RATE = 6
-  HOURS = 7
-  LOC_X = 8
-  LOC_Y = 9
-
-
-  #Value for each work type
-  KITCHEN = 0 #kitchen
-  BATH = 1 #bathroom
-  FURN = 2 #furniture
-  ALL = 3 #entire apartment
-  
-  res = {}
 
   #work type doesn't match, return very high diff score
   if landlord[WORK_TYPE] != tenant[WORK_TYPE]:
@@ -67,10 +46,9 @@ def calc_diff(self, landlord, tenant):
   hour_diff = abs(landlord[HOURS] - tenant[HOURS]) 
   
   #diff in location distance
-  dist_diff = #??? use 
+  dist_diff = #??? use Google Maps
+
   
-  res["hour_diff"] = hour_diff
-  res["dist_diff"] = dist_diff
 
   
   
@@ -89,6 +67,27 @@ def main(self, landlord, tenants):
   return res
 
 if __name__ == '__main__':
+  
+  NUM_TAG = 9 #ie. length of each user's array
+
+  #map each tag to its index in the array
+  YEAR = 0
+  MONTH_START = 1
+  DATE_START = 2
+  MONTH_END = 3
+  DATE_END = 4
+  WORK_TYPE = 5
+  RATE = 6
+  HOURS = 7
+  LOC_X = 8
+  LOC_Y = 9
+
+
+  #Value for each work type
+  KITCHEN = 0 #kitchen
+  BATH = 1 #bathroom
+  FURN = 2 #furniture
+  ALL = 3 #entire apartment
            
   res = self.main(landlord, tenants)
            
