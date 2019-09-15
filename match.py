@@ -1,7 +1,6 @@
 """
 Toy algorithm for computing score between a landlord's request and a tenant's availability
 TODO:
-  calc_dist_diff
   get tenant id
 """
 
@@ -63,10 +62,24 @@ def calc_dist_diff(landlord_loc, tenant_loc):
 
   data = r.json()
 
-  print(data['rows'][0]['elements'][0]['duration']['text']) #minute representation of walking distance
+  res = data['rows'][0]['elements'][0]['duration']['text'].split(" ") 
   
+  #hack to parse the result into int that represents the minute
+  final_res = 0
+
+  i = 1
+  while i < len(res):
+    if res[i] == 'days' or res[i] == 'day':
+      final_res += 1440 * int(res[i-1])
+    elif res[i] == 'hours' or res[i] == 'hour':
+      final_res += 60 * int(res[i-1])
+    else:
+      final_res += int(res[i-1])
+
+    i += 2
+
   
-  return 2.0 #needs to be changed 
+  return final_res
 
 
 
