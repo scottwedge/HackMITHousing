@@ -49,10 +49,10 @@ response_en = client.synthesize_speech(synthesis_input_en, voice_en, audio_confi
 response_es = client.synthesize_speech(synthesis_input_es, voice_es, audio_config)
 
 # The response's audio_content is binary.
-with open('out_en.mp3', 'wb') as out:
+with open('out_en.mp3', 'wb') as out_en:
     # Write the response to the output file.
     out_en.write(response_en.audio_content)
 
-with open('out_es.mp3', 'wb') as out:
+with open('out_es.mp3', 'wb') as out_es:
     # Write the response to the output file.
     out_es.write(response_es.audio_content)
