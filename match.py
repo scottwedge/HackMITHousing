@@ -1,7 +1,5 @@
 """
-Toy algorithm for computing score between a landlord's request and a tenant's availability
-TODO:
-  get tenant id
+Algorithm for computing score between a landlord's request and a tenant's availability
 """
 
 import datetime
