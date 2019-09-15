@@ -166,16 +166,19 @@ if __name__ == '__main__':
   loc1 = "Massachusetts Institute of Technology"
   loc2 = "Harvard University"
   loc3 = "Tufts University"
-  loc4 = "Boston Public Library"
+  loc4 = "700 Boylston Street, MA" #Boston Public Library
   
   landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, loc1]
   tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, loc2],
-              [2018,5, 2, 5, 20, BATH, 4, 3, loc3],
-              [2018, 4, 2, 6, 30, ALL, 3, 1, loc4]]
+              [2018,5, 2, 5, 20, BATH, 4, 3, loc4],
+              [2018, 4, 2, 6, 30, ALL, 3, 1, loc3]]
   
   res = main(landlord, tenants)
 
   sorted_res = sorted(res.items(), key=lambda kv: kv[1])
-          
+  
+  print("The sorted recommendations are [tenant id, diff score]")
   print(sorted_res)
   
+
+
