@@ -24,10 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', redirect),
     path('login/', include('login.urls')),
-    path('employee/', include('employee.urls')),
-    path('employer/', include('employer.urls')),
-    path('landlord/', include('landlord.urls')),
-    path('tenant/', include('tenant.urls'))
+    # path('employee/', include('employee.urls')),
+    # path('employer/', include('employer.urls')),
+    # path('landlord/', include('landlord.urls')),
+    # path('tenant/', include('tenant.urls'))
     # yet to be implemented:
     # - upload images of the house;
     # - images of employers & employees

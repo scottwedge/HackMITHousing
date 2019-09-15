@@ -1,39 +1,30 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import logout, authenticate, login
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-attempt = False
+from .forms import IdentityForm
 
 def index(request):
     # simply redirecting to the first page
-    return render(request, 'login.html', {'attempt': attempt})
+    return render(request, 'login.html')
 
-def check(request):
-    # login authetication
-    id = request.POST['id']
-    pw = request.POST['pw']
-
-
-    user = authenticate(username=id, password=pw)
-
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect(reverse('login:main'))
-    else:
-        return render(request, 'login.html', {'attempt': True})
-
-@login_required(login_url='/login')
-def main(request):
-    identity = request.POST['identity']
-    if identity == 'employer':
-        return render(request, 'employer.html')
-    elif identity == 'employee':
-        return render(request, 'employee.html')
+def get_name(request):
+    if request.method == 'POST':
+        form = IdentityForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['identity'])
+            if form.cleaned_data['your_identity'] == 'employer':
+                return render(request, "employer.html")
+            if form.cleaned_data['your_identity' == 'employee']:
+                return render(request, "employee.html")
+        else:
+            print("got to form invalid")
+            return HttpResponseRedirect('/login')
 
 
-@login_required(login_url='/login')
+def login(request):
+    return render(request, 'login.html')
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login:index'))

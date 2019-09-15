@@ -1,0 +1,117 @@
+{% load static %}
+
+<html>
+
+<head>
+	<title>Want a job? Want a house?</title>
+	<link rel="stylesheet" href="/static/login/first_style.css">
+</head>
+
+<body>
+	<div class="logout">
+		<div>
+			<a href="{% url 'login:logout'%}">
+				Logout
+			</a>
+		</div>
+	</div>
+
+	<div class="options">
+		<div class="welcome">
+			<a href="#0">
+				<button class="searchbtn">
+					Home
+				</button>
+			</a>
+		</div>
+		<div class="search dropdown">
+			<a href="#1">
+				<button class="searchbtn">
+          Job Request
+        </button>
+			</a>
+		</div>
+
+		<div class="mapsearch">
+			<a href="#2">
+				<button class="searchbtn">
+          Rent a house
+				</button>
+			</a>
+		</div>
+
+	<scroll-container>
+		<scroll-page id="0">
+			<center>
+				<h1>Clean House Initiative</h1>
+				<p>
+					Welcome to CHI!
+				</p>
+			</center>
+		</scroll-page>
+		<scroll-page id="1">
+			<div>
+				<p> Basic Search </p>
+			</div>
+			<div>
+				<center>
+					<form action="/query/simple_search" method="post">
+						{% csrf_token %}
+						<input type="text" id="searchbox" name="allfields" maxlength="30" size="50" />
+						<input id="sSearchbutton" type="submit" value="Search" name="search" /><br />
+					</form>
+					<form class="center" action="/query/disp_advart" method="post">
+						{% csrf_token %}
+						<input type="submit" value="Artifact Advanced Search" name="addresource" class="indexbutton" />
+					</form>
+					<form class="center" action="/query/disp_advexcv" method="post">
+						{% csrf_token %}
+						<input type="submit" value="Excavation Place Advanced Search" name="addresource" class="indexbutton" />
+					</form>
+				</center>
+			</div>
+		</scroll-page>
+
+		<scroll-page id="2">
+			<div>
+				<p> Map search </p>
+			</div>
+			<div>
+				<a href="/map/map_google">
+					<button class="searchbtn">
+						Google Map
+					</button>
+				</a>
+				<a href="/map/map_baidu">
+					<button class="searchbtn">
+						Baidu Map
+					</button>
+				</a>
+			</div>
+		</scroll-page>
+
+		<scroll-page id="3">
+			<div>
+				<p> Add </p>
+			</div>
+			<center>
+				<div>
+					<form class="center" action="/add/add_art" method="post">
+						{%csrf_token%}
+						<input type="submit" value="Add Artifact" name="addartifact" class="indexbutton" />
+					</form>
+					<form class="center" action='/add/add_pub' method="post">
+						{%csrf_token%}
+						<input type="submit" value="Add Publication" name="addresource" class="indexbutton" />
+					</form>
+					<form class="center" action="/add/add_place" method="post">
+						{%csrf_token%}
+						<input type="submit" value="Add Excavation Place" name="addexcavation" class="indexbutton" />
+					</form>
+				</div>
+			</center>
+		</scroll-page>
+	</scroll-container>
+
+</body>
+<html>
