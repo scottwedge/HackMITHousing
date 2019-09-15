@@ -53,7 +53,7 @@ def calc_dist_diff(landlord_loc, tenant_loc):
 
   key = "AIzaSyC6_Bj65KjeNOmigkezVM3RI5sfI8K-TmA" #this is our personal key for the Google Maps API
 
-  #loc1 = "Massachusetts Institute of Massachusetts"
+  #loc1 = "Massachusetts Institute of Technology"
   #loc2 = "Harvard University"
 
   PARAMS = {'origins': landlord_loc, 'destinations': tenant_loc, 'key': key, 'mode': "walking"}
