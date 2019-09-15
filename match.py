@@ -7,6 +7,34 @@ TODO:
 
 import datetime
 
+import requests
+
+def geocode_request(landlord_address, tenant_address):
+  # api-endpoint 
+  URL = "https://maps.googleapis.com/maps/api/geocode/json"
+
+  # location given here 
+  landlord_address = "Massachusetts Institute of Technology"
+  key = "AIzaSyC6_cXqg7wSDJMhx9Z19VV3AdgH5ZqXMnI" #this is our personal key for the Google Maps API
+
+  # defining a params dict for the parameters to be sent to the API 
+  params_landlord = {'address':landlord_address, 'key':key} 
+
+  # sending get request and saving the response as response object 
+  response_landlord = requests.get(url = URL, params = params_landlord) 
+
+  # extracting data in json format 
+  data_landlord = response_landlord.json() 
+
+
+  # extracting latitude, longitude and formatted address  
+  # of the first matching location 
+  latitude_l = data['results'][0]['geometry']['location']['lat'] 
+  longitude_l = data['results'][0]['geometry']['location']['lng'] 
+  formatted_address_l = data['results'][0]['formatted_address'] 
+
+  # printing the output 
+  #print("Latitude:%s\nLongitude:%s\nFormatted Address:%s" %(latitude, longitude,formatted_address))
 
 
 def calc_dist_diff(landlord_x, landlord_y, tenant_x, tenant_y):
