@@ -122,16 +122,18 @@ def calc_diff(landlord, tenant):
   #print(res)
   return sum(res)
 
+
 def print_info(tenants, idx):
   """
   inputs: tenants: list of tenant arrays; idx
   """
-  for idx in range(len(tenants)):
-    print("Name: {}, {}".format(tenants[idx][NAME_LAST], tenants[idx][NAME_FIRST))
-    print("Age: {}".format(tenants[idx][AGE])
-    print("Start Date: {} / {}, {}".format(tenants[idx][MONTH_START], tenants[idx][DATE_START], tenants[idx][YEAR])
-    print("Location: {}".format(tenants[idx][LOCATION])
-          
+
+  print("Name: {}, {}".format(tenants[idx][NAME_LAST], tenants[idx][NAME_FIRST]))
+  print("Age: {}".format(tenants[idx][AGE]))
+  print("Start Date (MM/DD/YYYY): {} / {}, {}".format(tenants[idx][MONTH_START], tenants[idx][DATE_START], tenants[idx][YEAR]))
+  print("Hours: {}".format(tenants[idx][HOURS]))
+  print("Location: {}".format(tenants[idx][LOCATION]))
+  print("——————")
   
   
 def main(landlord, tenants):
@@ -154,7 +156,7 @@ def main(landlord, tenants):
 
 if __name__ == '__main__':
   
-  NUM_TAG = 12 #ie. length of each user's array
+  NUM_TAG = 9 #ie. length of each user's array
 
   #map each tag to its index in the array
   YEAR = 0
@@ -165,7 +167,7 @@ if __name__ == '__main__':
   WORK_TYPE = 5
   RATE = 6 #rating
   HOURS = 7
-  LOCATION = 8 #type: str
+  LOCATION = 8 #type should be string
   NAME_LAST = 9 #type: str
   NAME_FIRST = 10 #type: str
   AGE = 11 #type: int
@@ -185,7 +187,7 @@ if __name__ == '__main__':
   landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, loc1]
   tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, loc2, "Smith", "John", 40],
               [2018,5, 2, 5, 20, BATH, 4, 3, loc4, "Fish", "Jane", 46],
-              [2018, 4, 2, 6, 30, ALL, 3, 1, loc3, "Last", "First", 48]]
+              [2018, 4, 2, 6, 30, ALL, 3, 1, loc3, "Last Name", "First Name", 48]]
   
   res = main(landlord, tenants)
 
@@ -193,9 +195,7 @@ if __name__ == '__main__':
   
   print("The sorted recommendations are [tenant id, diff score]")
   print(sorted_res)
-          
-  for idx, score in sorted_res:
-      print_info(tenants, idx)
   
 
-
+  for idx, score in sorted_res:
+      print_info(tenants, idx)
