@@ -51,7 +51,7 @@ def calc_dist_diff(landlord_loc, tenant_loc):
   """  
   URL = "https://maps.googleapis.com/maps/api/distancematrix/json"
 
-  key = "AIzaSyC6_Bj65KjeNOmigkezVM3RI5sfI8K-TmA" #this is our personal key for the Google Maps API
+  key = "AIzaSyC6_Bj65KjeNOmigkezVM3RI5sfI8K-TmA" #this is our personal key for the Distance Matrix API
 
   #loc1 = "Massachusetts Institute of Technology"
   #loc2 = "Harvard University"
@@ -66,7 +66,7 @@ def calc_dist_diff(landlord_loc, tenant_loc):
   
   #hack to parse the result into int that represents the minute
   final_res = 0
-
+  
   i = 1
   while i < len(res):
     if res[i] == 'days' or res[i] == 'day':
@@ -79,16 +79,14 @@ def calc_dist_diff(landlord_loc, tenant_loc):
     i += 2
 
   
-  return final_res
+  return float(final_res)
 
 
 
 def calc_diff(landlord, tenant):
   """
-  Main algorithm to calculate the difference score for one pair of landlord and tenant
-  output: diff score ---???
+  Algorithm to calculate the difference score for one pair of landlord and tenant
   """
-
 
   #work type doesn't match, return very high diff score
   if landlord[WORK_TYPE] != tenant[WORK_TYPE]:
@@ -113,7 +111,7 @@ def calc_diff(landlord, tenant):
   hour_diff = float(abs(landlord[HOURS] - tenant[HOURS])) 
   
   #diff in location distance
-  dist_diff = calc_dist_diff(landlord[LOC_X], landlord[LOC_Y], tenant[LOC_X], tenant[LOC_Y])
+  dist_diff = calc_dist_diff(landlord[LOCATION], tenant[LOCATION])
 
   
   #the following needs to be changed
@@ -156,8 +154,7 @@ if __name__ == '__main__':
   WORK_TYPE = 5
   RATE = 6 #rating
   HOURS = 7
-  LOC_X = 8
-  LOC_Y = 9
+  LOCATION = 8 #type should be string
 
 
   #Value for each work type
@@ -166,10 +163,15 @@ if __name__ == '__main__':
   FURN = 2 #furniture
   ALL = 3 #entire apartment
   
-  landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, 0, 0]
-  tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, 0, 0],
-              [2018,5, 2, 5, 20, BATH, 4, 3, 0, 0],
-              [2018, 4, 2, 6, 30, ALL, 3, 1, 0, 0]]
+  loc1 = "Massachusetts Institute of Technology"
+  loc2 = "Harvard University"
+  loc3 = "Tufts University"
+  loc4 = "Boston Public Library"
+  
+  landlord = [2018, 5, 1, 5, 10, ALL, 3, 2, loc1]
+  tenants = [[2018, 4, 2, 6, 5, ALL, 3, 4, loc2],
+              [2018,5, 2, 5, 20, BATH, 4, 3, loc3],
+              [2018, 4, 2, 6, 30, ALL, 3, 1, loc4]]
   
   res = main(landlord, tenants)
 
