@@ -1,7 +1,7 @@
 from django.db import models
 
 import datetime 
-from calendar immport monthrange
+from calendar import monthrange
 
 GENDERS = [('male', 'MALE'), ('female', 'FEMALE')]
 WORK_TYPES = [('kitchen', 'KITCHEN'), ('bathroom', 'BATHROOM'), ('furniture', 'FURNITURE'), ('all', 'ALL')]
